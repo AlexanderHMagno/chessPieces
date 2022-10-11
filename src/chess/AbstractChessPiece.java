@@ -35,7 +35,13 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
     @Override
     public boolean canKill(ChessPiece piece) {
-        return false;
+
+        //Check is not the same color
+        if (this.getColor() == piece.getColor()) {
+            return false;
+        }
+
+        return this.canMove(piece.getRow(), piece.getColumn());
     }
 
     @Override

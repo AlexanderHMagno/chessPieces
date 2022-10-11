@@ -34,13 +34,32 @@ public class Pawn extends AbstractChessPiece {
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
 
 
+    @Override
+    public boolean canKill(ChessPiece piece) {
 
+        //Check is not your team
+        if(this.getColor() == piece.getColor()) {
+            return false;
+        }
 
+        int diff = this.row - piece.getRow();
+        int absDiffRow = Math.abs(diff);
+        int absDiffCol = Math.abs(this.column - piece.getColumn());
 
-            if(this.firstMovement() && row <= 2  ) {
-
+        //To kill it needs to move exactly 1 row and 1 column
+        if ((absDiffRow == 1 && absDiffCol == 1 )) {
+            //If whites, the direction must be positive (x1 - x2) > 0
+            //If whites, the direction must be negative (x1 - x2) < 0
+            if(this.color == Color.WHITE && diff > 0 ||
+                    this.color == Color.BLACK && diff < 0
+            ) {
+                return true;
             }
         }
 
