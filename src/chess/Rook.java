@@ -8,6 +8,13 @@ public class Rook extends AbstractChessPiece {
 
     @Override
     public boolean canMove(int row, int col) {
+
+        if(!this.outOfBoundary(row,col)) {
+            if (this.row == row || this.column == col) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

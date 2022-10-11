@@ -8,6 +8,14 @@ public class Bishop extends AbstractChessPiece {
 
     @Override
     public boolean canMove(int row, int col) {
+        //The difference between both points should be equal
+        if(!this.outOfBoundary(row,col)) {
+            if (Math.abs(this.row - row) == Math.abs(this.column - col)) {
+                return true;
+            }
+        }
+
         return false;
+
     }
 }

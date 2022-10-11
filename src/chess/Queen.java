@@ -8,6 +8,19 @@ public class Queen extends AbstractChessPiece {
 
     @Override
     public boolean canMove(int row, int col) {
+
+        //The difference between both points should be equal for diagonal movement
+        //The row or column should be equal for rook movement
+        if(!this.outOfBoundary(row,col)) {
+            if (Math.abs(this.row - row) == Math.abs(this.column - col) ||
+                    this.row == row || this.column == col
+            ) {
+                return true;
+            }
+        }
+
         return false;
+
+
     }
 }

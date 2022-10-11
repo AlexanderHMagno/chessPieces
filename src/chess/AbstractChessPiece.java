@@ -30,7 +30,7 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
     @Override
     public Color getColor() {
-        return Color.WHITE;
+        return this.color;
     }
 
     @Override
@@ -38,7 +38,15 @@ public abstract class AbstractChessPiece implements ChessPiece {
         return false;
     }
 
-    private boolean outOfBoundary(int row, int column) {
+    @Override
+    public boolean canMove(int row, int col){
+        if(this.outOfBoundary(row,col)) {
+            return false;
+        }
+        return true;
+    }
+
+    protected boolean outOfBoundary(int row, int column) {
 
         if(row < 0 || column <0 || row > 7 || column >7) {
             return true;
