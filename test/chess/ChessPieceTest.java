@@ -6,6 +6,7 @@ public class ChessPieceTest {
 
     private ChessPiece pawnBlack1;
     private ChessPiece pawnBlack2;
+    private ChessPiece pawnBlack3;
     private ChessPiece knightBlack1;
     private ChessPiece bishopBlack1;
     private ChessPiece rookBlack1;
@@ -14,6 +15,7 @@ public class ChessPieceTest {
 
     private ChessPiece pawnWhite1;
     private ChessPiece pawnWhite2;
+    private ChessPiece pawnWhite3;
     private ChessPiece knightWhite1;
     private ChessPiece bishopWhite1;
     private ChessPiece rookWhite1;
@@ -26,12 +28,14 @@ public class ChessPieceTest {
         //Pawns
         this.pawnBlack1 = new Pawn(2,3, Color.BLACK);
         this.pawnBlack2 = new Pawn(4,6, Color.BLACK);
+        this.pawnBlack3 = new Pawn(3,2, Color.BLACK);
         this.pawnWhite1 = new Pawn(6,0, Color.WHITE);
         this.pawnWhite2 = new Pawn(3,4, Color.WHITE);
+        this.pawnWhite3 = new Pawn(1,2, Color.WHITE);
 
         //Knights
         this.knightBlack1 = new Knight(4,2, Color.BLACK);
-        this.knightWhite1 = new Knight(6,0, Color.WHITE);
+        this.knightWhite1 = new Knight(7,7, Color.WHITE);
 
         //Bishops
         this.bishopBlack1 = new Bishop(0,0, Color.BLACK);
@@ -47,8 +51,24 @@ public class ChessPieceTest {
 
         //Kings
         this.kingBlack1 = new King(1,6, Color.BLACK);
-        this.kingBlack1 = new King(5,6, Color.WHITE);
+        this.kingWhite1 = new King(5,6, Color.WHITE);
     }
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void outOfColumn() {
+        ChessPiece crazyPiece = new Pawn(0,8, Color.WHITE);
+    }
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void outOfRow () {
+        ChessPiece crazyPiece = new Queen(8,3, Color.BLACK);
+    }
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void negativeSetPosition () {
+        ChessPiece crazyPiece = new Rook(-2,4, Color.BLACK);
+    }
+
 
     @org.junit.Test
     public void getRow() {
@@ -114,84 +134,164 @@ public class ChessPieceTest {
     @org.junit.Test
     public void canMoveTrue() {
 
-        //Blacks
-        assertTrue(pawnBlack1.canMove(0,0));
-        assertTrue(pawnBlack2.canMove(0,0));
-        assertTrue(knightBlack1.canMove(0,0));
-        assertTrue(bishopBlack1.canMove(0,0));
-        assertTrue(rookBlack1.canMove(0,0));
-        assertTrue(queenBlack1.canMove(0,0));
-        assertTrue(kingBlack1.canMove(0,0));
+        //Black Pawns
+        assertTrue(pawnBlack1.canMove(3,3));
+        assertTrue(pawnBlack2.canMove(5,6));
+        //Black Knight
+        assertTrue(knightBlack1.canMove(3,4));
+        assertTrue(knightBlack1.canMove(5,0));
+        // bishop
+        assertTrue(bishopBlack1.canMove(4,4));
+        assertTrue(bishopBlack1.canMove(7,7));
+        //Black Rook
+        assertTrue(rookBlack1.canMove(0,4));
+        assertTrue(rookBlack1.canMove(7,0));
+        //Black Queen
+        assertTrue(queenBlack1.canMove(0,5));
+        assertTrue(queenBlack1.canMove(2,1));
+        assertTrue(queenBlack1.canMove(7,0));
+        assertTrue(queenBlack1.canMove(3,6));
+        //Black King
+        assertTrue(kingBlack1.canMove(0,6));
+        assertTrue(kingBlack1.canMove(1,5));
+        assertTrue(kingBlack1.canMove(2,7));
+
         //Whites
-        assertTrue(pawnWhite1.canMove(0,0));
-        assertTrue(pawnWhite2.canMove(0,0));
-        assertTrue(knightWhite1.canMove(0,0));
-        assertTrue(bishopWhite1.canMove(0,0));
+        //Pawns
+        assertTrue(pawnWhite1.canMove(4,0));
+        assertTrue(pawnWhite1.canMove(5,0));
+        assertTrue(pawnWhite2.canMove(2,3));
+        //Knights
+        assertTrue(knightWhite1.canMove(6,5));
+        assertTrue(knightWhite1.canMove(5,6));
+        //Bishops
+        assertTrue(bishopWhite1.canMove(1,3));
+        assertTrue(bishopWhite1.canMove(2,6));
+        assertTrue(bishopWhite1.canMove(7,1));
+        assertTrue(bishopWhite1.canMove(4,6));
+        //Rooks
         assertTrue(rookWhite1.canMove(0,0));
-        assertTrue(queenWhite1.canMove(0,0));
-        assertTrue(kingWhite1.canMove(0,0));
+        assertTrue(rookWhite1.canMove(3,7));
+        //Queen
+        assertTrue(queenWhite1.canMove(2,5));
+        assertTrue(queenWhite1.canMove(5,4));
+        assertTrue(queenWhite1.canMove(1,3));
+        assertTrue(queenWhite1.canMove(4,7));
+        //King
+        assertTrue(kingWhite1.canMove(4,6));
+        assertTrue(kingWhite1.canMove(6,6));
+        assertTrue(kingWhite1.canMove(5,7));
+        assertTrue(kingWhite1.canMove(6,5));
+        assertTrue(kingWhite1.canMove(4,7));
     }
 
     @org.junit.Test
     public void canMoveFalse() {
 
         //Blacks
-        assertFalse(pawnBlack1.canMove(0,0));
-        assertFalse(pawnBlack2.canMove(0,0));
-        assertFalse(knightBlack1.canMove(0,0));
-        assertFalse(bishopBlack1.canMove(0,0));
-        assertFalse(rookBlack1.canMove(0,0));
-        assertFalse(queenBlack1.canMove(0,0));
-        assertFalse(kingBlack1.canMove(0,0));
+        //Can not move backwards
+        assertFalse(pawnBlack1.canMove(1,3));
+        assertFalse(pawnBlack2.canMove(3,6));
+        //Can not jump if its not first movement
+        assertFalse(pawnBlack1.canMove(4,3));
+        assertFalse(pawnBlack2.canMove(6,6));
+
+        //Can not move to the right
+        assertFalse(knightBlack1.canMove(4,3));
+        //Can not get out of the chess board
+        assertFalse(bishopBlack1.canMove(8,8));
+        assertFalse(bishopBlack1.canMove(0,2));
+        //Can not move diagonal
+        assertFalse(rookBlack1.canMove(5,6));
+        //Can not move in L
+        assertFalse(queenBlack1.canMove(4,4));
+        //Can not move more than 2
+        assertFalse(kingBlack1.canMove(1,4));
+
         //Whites
-        assertFalse(pawnWhite1.canMove(0,0));
-        assertFalse(pawnWhite2.canMove(0,0));
-        assertFalse(knightWhite1.canMove(0,0));
-        assertFalse(bishopWhite1.canMove(0,0));
-        assertFalse(rookWhite1.canMove(0,0));
-        assertFalse(queenWhite1.canMove(0,0));
-        assertFalse(kingWhite1.canMove(0,0));
+        assertFalse(pawnWhite1.canMove(3,6));
+        //can not move horizontally
+        assertFalse(pawnWhite1.canMove(6,1));
+        //Can not move backwards
+        assertFalse(pawnWhite2.canMove(4,4));
+        //Can not move out of the chessboard
+        assertFalse(knightWhite1.canMove(5,8));
+        //Can not move vertically
+        assertFalse(bishopWhite1.canMove(2,5));
+        //Can not move diagonally
+        assertFalse(rookWhite1.canMove(7,0));
+        //Can not move out of boundary
+        assertFalse(queenWhite1.canMove(4,8));
+        //Can not move more than 2 diagonally
+        assertFalse(kingWhite1.canMove(3,4));
     }
 
     @org.junit.Test
     public void canKillTrue() {
 
         //Blacks
-        assertTrue(pawnBlack1.canKill(pawnBlack1));
-        assertTrue(pawnBlack2.canKill(pawnBlack1));
-        assertTrue(knightBlack1.canKill(pawnBlack1));
-        assertTrue(bishopBlack1.canKill(pawnBlack1));
-        assertTrue(rookBlack1.canKill(pawnBlack1));
-        assertTrue(queenBlack1.canKill(pawnBlack1));
-        assertTrue(kingBlack1.canKill(pawnBlack1));
+        assertTrue(pawnBlack1.canKill(pawnWhite2));
+        assertTrue(knightBlack1.canKill(pawnWhite2));
+        assertTrue(bishopBlack1.canKill(knightWhite1));
+        assertTrue(rookBlack1.canKill(knightWhite1));
+        assertTrue(rookBlack1.canKill(pawnWhite2));
+        assertTrue(queenBlack1.canKill(rookWhite1));
+        assertTrue(queenBlack1.canKill(bishopWhite1));
+        assertTrue(queenBlack1.canKill(pawnWhite2));
+        assertTrue(queenBlack1.canKill(queenWhite1));
+        assertTrue(kingBlack1.canKill(rookWhite1));
         //Whites
-        assertTrue(pawnWhite1.canKill(pawnBlack1));
         assertTrue(pawnWhite2.canKill(pawnBlack1));
-        assertTrue(knightWhite1.canKill(pawnBlack1));
-        assertTrue(bishopWhite1.canKill(pawnBlack1));
-        assertTrue(rookWhite1.canKill(pawnBlack1));
+        assertTrue(pawnWhite2.canKill(queenBlack1));
+        assertTrue(bishopWhite1.canKill(pawnBlack2));
+        assertTrue(rookWhite1.canKill(bishopBlack1));
+
         assertTrue(queenWhite1.canKill(pawnBlack1));
-        assertTrue(kingWhite1.canKill(pawnBlack1));
+        assertTrue(queenWhite1.canKill(knightBlack1));
+        assertTrue(queenWhite1.canKill(pawnBlack2));
+        assertTrue(queenWhite1.canKill(queenBlack1));
+        assertTrue(queenWhite1.canKill(kingBlack1));
+
+        assertTrue(kingWhite1.canKill(pawnBlack2));
     }
 
     @org.junit.Test
     public void canKillFalse() {
 
         //Blacks
-        assertFalse(pawnBlack1.canKill(pawnBlack1));
-        assertFalse(pawnBlack2.canKill(pawnBlack1));
-        assertFalse(knightBlack1.canKill(pawnBlack1));
-        assertFalse(bishopBlack1.canKill(pawnBlack1));
-        assertFalse(rookBlack1.canKill(pawnBlack1));
-        assertFalse(queenBlack1.canKill(pawnBlack1));
-        assertFalse(kingBlack1.canKill(pawnBlack1));
+        assertFalse(pawnBlack1.canKill(pawnWhite3));
+        assertFalse(pawnBlack2.canKill(kingWhite1));
+        assertFalse(knightBlack1.canKill(bishopWhite1));
+        assertFalse(bishopBlack1.canKill(rookWhite1));
+        assertFalse(rookBlack1.canKill(pawnWhite1));
+        assertFalse(queenBlack1.canKill(kingWhite1));
+        assertFalse(kingBlack1.canKill(kingWhite1));
+
         //Whites
-        assertFalse(pawnWhite1.canKill(pawnBlack1));
-        assertFalse(pawnWhite2.canKill(pawnBlack1));
-        assertFalse(knightWhite1.canKill(pawnBlack1));
-        assertFalse(bishopWhite1.canKill(pawnBlack1));
-        assertFalse(rookWhite1.canKill(pawnBlack1));
-        assertFalse(queenWhite1.canKill(pawnBlack1));
-        assertFalse(kingWhite1.canKill(pawnBlack1));
+        assertFalse(pawnWhite1.canKill(knightBlack1));
+        assertFalse(pawnWhite2.canKill(kingBlack1));
+        assertFalse(pawnWhite3.canKill(pawnBlack1));
+        assertFalse(knightWhite1.canKill(rookBlack1));
+        assertFalse(bishopWhite1.canKill(queenBlack1));
+        assertFalse(rookWhite1.canKill(kingBlack1));
+        assertFalse(queenWhite1.canKill(rookBlack1));
+        assertFalse(kingWhite1.canKill(queenBlack1));
+    }
+
+    @org.junit.Test
+    public void canNotKillSameTeam() {
+
+        //Blacks
+        assertFalse(pawnBlack1.canKill(pawnBlack3));
+        assertFalse(knightBlack1.canKill(pawnBlack1));
+        assertFalse(queenBlack1.canKill(kingBlack1));
+        assertFalse(queenBlack1.canKill(pawnBlack1));
+        assertFalse(kingBlack1.canKill(queenBlack1));
+
+        //Whites
+        assertFalse(pawnWhite2.canKill(queenWhite1));
+        assertFalse(knightWhite1.canKill(kingWhite1));
+        assertFalse(rookWhite1.canKill(knightWhite1));
+        assertFalse(queenWhite1.canKill(pawnWhite2));
     }
 }
