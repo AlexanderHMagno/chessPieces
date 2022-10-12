@@ -55,9 +55,9 @@ public abstract class AbstractChessPiece implements ChessPiece {
     @Override
     public String toString() {
         return "{" +
-                "row=" + row +
-                ", column=" + column +
-                ", color=" + color +
+                "row=" + this.getRow() +
+                ", column=" + this.getColumn() +
+                ", color=" + this.getColor() +
                 ", type=" + this.getClass().getSimpleName()+
                 '}';
     }
