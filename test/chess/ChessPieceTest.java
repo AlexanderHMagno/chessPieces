@@ -55,18 +55,28 @@ public class ChessPieceTest {
     }
 
     @org.junit.Test (expected = IllegalArgumentException.class)
-    public void outOfColumn() {
+    public void testOutOfColumn() {
         ChessPiece crazyPiece = new Pawn(0,8, Color.WHITE);
     }
 
     @org.junit.Test (expected = IllegalArgumentException.class)
-    public void outOfRow () {
+    public void testOutOfRow () {
         ChessPiece crazyPiece = new Queen(8,3, Color.BLACK);
     }
 
     @org.junit.Test (expected = IllegalArgumentException.class)
-    public void negativeSetPosition () {
+    public void testNegativeSetPosition () {
         ChessPiece crazyPiece = new Rook(-2,4, Color.BLACK);
+    }
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testInitialBlackPawnPosition () {
+        ChessPiece crazyPiece = new Pawn(0,4, Color.BLACK);
+    }
+
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testInitialWhitePawnPosition () {
+        ChessPiece crazyPiece = new Pawn(7,4, Color.WHITE);
     }
 
 
@@ -83,7 +93,7 @@ public class ChessPieceTest {
         //Whites
         assertEquals(6,pawnWhite1.getRow());
         assertEquals(3,pawnWhite2.getRow());
-        assertEquals(6,knightWhite1.getRow());
+        assertEquals(7,knightWhite1.getRow());
         assertEquals(3,bishopWhite1.getRow());
         assertEquals(0,rookWhite1.getRow());
         assertEquals(4,queenWhite1.getRow());
@@ -103,7 +113,7 @@ public class ChessPieceTest {
         //Whites
         assertEquals(0,pawnWhite1.getColumn());
         assertEquals(4,pawnWhite2.getColumn());
-        assertEquals(0,knightWhite1.getColumn());
+        assertEquals(7,knightWhite1.getColumn());
         assertEquals(5,bishopWhite1.getColumn());
         assertEquals(7,rookWhite1.getColumn());
         assertEquals(3,queenWhite1.getColumn());
@@ -293,5 +303,26 @@ public class ChessPieceTest {
         assertFalse(knightWhite1.canKill(kingWhite1));
         assertFalse(rookWhite1.canKill(knightWhite1));
         assertFalse(queenWhite1.canKill(pawnWhite2));
+    }
+
+    @org.junit.Test
+    public void testToString() {
+        assertEquals("{row=2, column=3, color=BLACK, type=Pawn}", pawnBlack1.toString());
+        assertEquals("{row=4, column=6, color=BLACK, type=Pawn}", pawnBlack2.toString());
+        assertEquals("{row=3, column=2, color=BLACK, type=Pawn}", pawnBlack3.toString());
+        assertEquals("{row=4, column=2, color=BLACK, type=Knight}", knightBlack1.toString());
+        assertEquals("{row=0, column=0, color=BLACK, type=Bishop}", bishopBlack1.toString());
+        assertEquals("{row=7, column=4, color=BLACK, type=Rook}", rookBlack1.toString());
+        assertEquals("{row=2, column=5, color=BLACK, type=Queen}", queenBlack1.toString());
+        assertEquals("{row=1, column=6, color=BLACK, type=King}", kingBlack1.toString());
+
+        assertEquals("{row=6, column=0, color=WHITE, type=Pawn}", pawnWhite1.toString());
+        assertEquals("{row=3, column=4, color=WHITE, type=Pawn}", pawnWhite2.toString());
+        assertEquals("{row=1, column=2, color=WHITE, type=Pawn}", pawnWhite3.toString());
+        assertEquals("{row=7, column=7, color=WHITE, type=Knight}", knightWhite1.toString());
+        assertEquals("{row=3, column=5, color=WHITE, type=Bishop}", bishopWhite1.toString());
+        assertEquals("{row=0, column=7, color=WHITE, type=Rook}", rookWhite1.toString());
+        assertEquals("{row=4, column=3, color=WHITE, type=Queen}", queenWhite1.toString());
+        assertEquals("{row=5, column=6, color=WHITE, type=King}", kingWhite1.toString());
     }
 }

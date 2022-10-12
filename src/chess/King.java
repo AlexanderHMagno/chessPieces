@@ -10,7 +10,7 @@ public class King extends AbstractChessPiece {
     public boolean canMove(int row, int col) {
 
         if(!this.outOfBoundary(row,col)) {
-            if (Math.abs(this.row - row) <= 1 && Math.abs(this.column - column) <= 1) {
+            if (Math.abs(this.row - row) <= 1 && Math.abs(this.column - col) <= 1) {
                 return true;
             }
         }

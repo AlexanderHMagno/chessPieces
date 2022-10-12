@@ -3,6 +3,11 @@ package chess;
 public class Pawn extends AbstractChessPiece {
     public Pawn(int row, int column, Color color) throws IllegalArgumentException {
         super(row, column, color);
+
+        if(this.getColor() == Color.BLACK && row == 0 || this.getColor() == Color.WHITE && row == 7) {
+            throw new IllegalArgumentException("Pawn can not be inserted in the first row");
+        }
+
     }
 
     private boolean firstMovement(){

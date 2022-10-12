@@ -52,6 +52,16 @@ public abstract class AbstractChessPiece implements ChessPiece {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "row=" + row +
+                ", column=" + column +
+                ", color=" + color +
+                ", type=" + this.getClass().getSimpleName()+
+                '}';
+    }
+
     protected boolean outOfBoundary(int row, int column) {
 
         if(row < 0 || column <0 || row > 7 || column >7) {
