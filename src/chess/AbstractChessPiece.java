@@ -1,11 +1,22 @@
 package chess;
 
+/**
+ * This represents an Abstract ChessPiece with a row, a column and Color,
+ * which implements the ChessPiece interface.
+ */
 public abstract class AbstractChessPiece implements ChessPiece {
     //According to the implementation setting a new position is not contemplated, final row and column.
     protected final int row;
     protected final int column;
     protected final Color color;
 
+    /**
+     * Constructor for AbstractChessPiece with a row, a column and Color.
+     * @param row Position on the BoardChess from top to bottom starting from 0 to 7
+     * @param column Position on the BoardChess from left to right starting from 0 to 7
+     * @param color Color can be BLACK or WHITE
+     * @throws IllegalArgumentException If position row and column are out of boundary ( 0< pos >7)
+     */
     public AbstractChessPiece(int row, int column, Color color) throws IllegalArgumentException {
 
         //This can be an area to move
@@ -46,7 +57,9 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
     @Override
     public boolean canMove(int row, int col){
-        if(this.outOfBoundary(row,col)) {
+
+        //If this Out of boundary or it's the same position
+        if(this.outOfBoundary(row,col) || isSamePosition(row,col) ) {
             return false;
         }
         return true;
@@ -62,11 +75,28 @@ public abstract class AbstractChessPiece implements ChessPiece {
                 '}';
     }
 
-    protected boolean outOfBoundary(int row, int column) {
+    /**
+     * Verify if the position is within the ChessBoard limits
+     * @param row Position of the ChessPiece from top to bottom
+     * @param col Position of the ChessPiece from left to right
+     * @return Checks if the piece is inside the ChessBoard
+     */
+    private boolean outOfBoundary(int row, int col) {
 
-        if(row < 0 || column <0 || row > 7 || column >7) {
+        if(row < 0 || col < 0 || row > 7 || col > 7) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks if the position is the same position that the ChessPiece is currently
+     * located at
+     * @param row Position of the ChessPiece from top to bottom
+     * @param col Position of the ChessPiece from left to right
+     * @return checks if the new position is the same as the current position
+     */
+    private boolean isSamePosition(int row, int col) {
+        return (this.getRow() == row  && this.getColumn() == col);
     }
 }
