@@ -5,14 +5,15 @@ package chess;
  * which implements the ChessPiece interface.
  */
 public abstract class AbstractChessPiece implements ChessPiece {
-    //According to the implementation setting a new position is not contemplated, final row and column.
-    protected final int row;
-    protected final int column;
+
+
+    protected final Position position;
+
     protected final Color color;
 
     /**
      * Constructor for AbstractChessPiece with a row, a column and Color.
-     * @param row Position on the BoardChess from top to bottom starting from 0 to 7
+     * @param row Position on the BoardChess from bottom to top starting from 0 to 7
      * @param column Position on the BoardChess from left to right starting from 0 to 7
      * @param color Color can be BLACK or WHITE
      * @throws IllegalArgumentException If position row and column are out of boundary ( 0< pos >7)
@@ -23,20 +24,18 @@ public abstract class AbstractChessPiece implements ChessPiece {
         if (this.outOfBoundary(row,column)) {
             throw new IllegalArgumentException("Out of boundaries");
         }
-
-        this.row = row;
-        this.column = column;
+        this.position = new Position(row,column);
         this.color = color;
     }
 
     @Override
     public int getRow() {
-        return this.row;
+        return this.position.getRow();
     }
 
     @Override
     public int getColumn() {
-        return this.column;
+        return this.position.getColumn();
     }
 
     @Override
@@ -99,4 +98,14 @@ public abstract class AbstractChessPiece implements ChessPiece {
     private boolean isSamePosition(int row, int col) {
         return (this.getRow() == row  && this.getColumn() == col);
     }
+
+    /**
+     * Helper function to Check if this piece is white.
+     * @return Check if this piece is white.
+     */
+    protected boolean isWhitePiece () {
+        return this.getColor() == Color.WHITE;
+    }
+
+
 }
