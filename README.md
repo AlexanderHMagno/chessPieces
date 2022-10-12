@@ -53,5 +53,5 @@ This will help the user to visually understand the position of each tested piece
 
 ![Chess](res/TestAllocation.jpg)
 
-As an example the position ok the Black King is (1,6); Which indicates this is located at row 6 column 6. 
+As an example the position of the Black King is (6,6); Which indicates this is located at row 6 column 6. 
 
