@@ -2,6 +2,9 @@ package chess;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class represents the test suite for the ChessPiece Implementation.
+ */
 public class ChessPieceTest {
 
     private ChessPiece pawnBlack1;
@@ -22,6 +25,10 @@ public class ChessPieceTest {
     private ChessPiece queenWhite1;
     private ChessPiece kingWhite1;
 
+    /**
+     * Setting Up some ChessPieces.
+     * @throws Exception
+     */
     @org.junit.Before
     public void setUp() throws Exception {
 
@@ -54,34 +61,51 @@ public class ChessPieceTest {
         this.kingWhite1 = new King(5,6, Color.WHITE);
     }
 
+    /**
+     * Check if a ChessPieces is created out of column boundary
+     */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testOutOfColumn() {
         ChessPiece crazyPiece = new Pawn(0,8, Color.WHITE);
     }
 
+    /**
+     * Check if a ChessPieces is created out of row boundary
+     */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testOutOfRow () {
         ChessPiece crazyPiece = new Queen(8,3, Color.BLACK);
     }
 
+    /**
+     * Check if a ChessPieces is created out of a row boundary (negative row)
+     */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testNegativeSetPosition () {
         ChessPiece crazyPiece = new Rook(-2,4, Color.BLACK);
     }
 
+    /**
+     * Checks if a Black Pawn can be created at row 0.
+     */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testInitialBlackPawnPosition () {
         ChessPiece crazyPiece = new Pawn(0,4, Color.BLACK);
     }
 
+    /**
+     * Checks if a Black Pawn can be created at row 7.
+     */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testInitialWhitePawnPosition () {
         ChessPiece crazyPiece = new Pawn(7,4, Color.WHITE);
     }
 
-
+    /**
+     * test the current row position of the ChessBoard
+     */
     @org.junit.Test
-    public void getRow() {
+    public void testGetRow() {
         //Blacks
         assertEquals(2,pawnBlack1.getRow());
         assertEquals(4,pawnBlack2.getRow());
@@ -100,8 +124,11 @@ public class ChessPieceTest {
         assertEquals(5,kingWhite1.getRow());
     }
 
+    /**
+     * test the current column position of the ChessBoard
+     */
     @org.junit.Test
-    public void getColumn() {
+    public void testGetColumn() {
         //Blacks
         assertEquals(3,pawnBlack1.getColumn());
         assertEquals(6,pawnBlack2.getColumn());
@@ -120,8 +147,11 @@ public class ChessPieceTest {
         assertEquals(6,kingWhite1.getColumn());
     }
 
+    /**
+     * test the color of the ChessBoard
+     */
     @org.junit.Test
-    public void getColor() {
+    public void testGetColor() {
 
         //Blacks
         assertEquals(Color.BLACK,pawnBlack1.getColor());
@@ -141,8 +171,11 @@ public class ChessPieceTest {
         assertEquals(Color.WHITE,kingWhite1.getColor());
     }
 
+    /**
+     * test only Valid movements, if a piece can move to that new Location
+     */
     @org.junit.Test
-    public void canMoveTrue() {
+    public void testCanMoveTrue() {
 
         //Black Pawns
         assertTrue(pawnBlack1.canMove(3,3));
@@ -195,8 +228,11 @@ public class ChessPieceTest {
         assertTrue(kingWhite1.canMove(4,7));
     }
 
+    /**
+     * test only invalid movements, if a piece can not move to that new Location
+     */
     @org.junit.Test
-    public void canMoveFalse() {
+    public void testCanMoveFalse() {
 
         //Blacks
         //Can not move backwards
@@ -236,8 +272,29 @@ public class ChessPieceTest {
         assertFalse(kingWhite1.canMove(3,4));
     }
 
+    /**
+     * test if a piece can be moved to the same position of origin
+     */
     @org.junit.Test
-    public void canKillTrue() {
+    public void testCanMoveSamePosition() {
+        assertFalse(pawnWhite2.canMove(pawnWhite2.getRow(),pawnWhite2.getColumn()));
+        //Can not move out of the chessboard
+        assertFalse(knightWhite1.canMove(knightWhite1.getRow(),knightWhite1.getColumn()));
+        //Can not move vertically
+        assertFalse(bishopWhite1.canMove(bishopWhite1.getRow(),bishopWhite1.getColumn()));
+        //Can not move diagonally
+        assertFalse(rookWhite1.canMove(rookWhite1.getRow(),rookWhite1.getColumn()));
+        //Can not move out of boundary
+        assertFalse(queenWhite1.canMove(queenWhite1.getRow(),queenWhite1.getColumn()));
+        //Can not move more than 2 diagonally
+        assertFalse(kingWhite1.canMove(kingWhite1.getRow(),kingWhite1.getColumn()));
+    }
+
+    /**
+     * Test only valid outputs, when a ChessPiece can kill another ChessPiece based on another position
+     */
+    @org.junit.Test
+    public void testCanKillTrue() {
 
         //Blacks
         assertTrue(pawnBlack1.canKill(pawnWhite2));
@@ -265,8 +322,11 @@ public class ChessPieceTest {
         assertTrue(kingWhite1.canKill(pawnBlack2));
     }
 
+    /**
+     * Test only invalid outputs, when a ChessPiece can not kill another ChessPiece based on another position
+     */
     @org.junit.Test
-    public void canKillFalse() {
+    public void testCanKillFalse() {
 
         //Blacks
         assertFalse(pawnBlack1.canKill(pawnWhite3));
@@ -288,11 +348,16 @@ public class ChessPieceTest {
         assertFalse(kingWhite1.canKill(queenBlack1));
     }
 
+    /**
+     * Test only betrayal outputs, when a ChessPiece is trying to kill a partner,
+     * this is not a spy game!
+     */
     @org.junit.Test
-    public void canNotKillSameTeam() {
+    public void testCanNotKillSameTeam() {
 
         //Blacks
         assertFalse(pawnBlack1.canKill(pawnBlack3));
+        assertFalse(pawnBlack1.canKill(pawnBlack1));
         assertFalse(knightBlack1.canKill(pawnBlack1));
         assertFalse(queenBlack1.canKill(kingBlack1));
         assertFalse(queenBlack1.canKill(pawnBlack1));
@@ -305,6 +370,10 @@ public class ChessPieceTest {
         assertFalse(queenWhite1.canKill(pawnWhite2));
     }
 
+    /**
+     * Test the toString Method it has the following structure
+     * "{row=row, column=col, color=color, type=type}"
+     */
     @org.junit.Test
     public void testToString() {
         assertEquals("{row=2, column=3, color=BLACK, type=Pawn}", pawnBlack1.toString());
