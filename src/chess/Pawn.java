@@ -16,7 +16,7 @@ public class Pawn extends AbstractChessPiece {
     public Pawn(int row, int column, Color color) throws IllegalArgumentException {
         super(row, column, color);
 
-        if(this.getColor() == Color.BLACK && row == 0 || this.getColor() == Color.WHITE && row == 7) {
+        if(this.getColor() == Color.WHITE && row < 1 || this.getColor() == Color.BLACK && row > 6) {
             throw new IllegalArgumentException("Pawn can not be inserted in the first row");
         }
 
@@ -28,15 +28,16 @@ public class Pawn extends AbstractChessPiece {
 
         if(super.canMove(row,col)) {
 
-            int diff = this.row - row;
+            int diff = this.getRow() - row;
             int absDiff = Math.abs(diff);
+            boolean equalColumn = this.getColumn() == col;
 
             //Only First Movement allows 2 rows, other movements max 1 row.
-            if ((this.firstMovement() && absDiff <=2 || absDiff == 1)) {
-                //If whites, the direction must be positive (x1 - x2) > 0
+            if (equalColumn && (this.firstMovement() && absDiff <=2 || absDiff == 1)) {
+                //If Blacks, the direction must be positive (x1 - x2) > 0
                 //If whites, the direction must be negative (x1 - x2) < 0
-                if(this.color == Color.WHITE && diff > 0 ||
-                        this.color == Color.BLACK && diff < 0
+                if(this.color == Color.BLACK && diff > 0 ||
+                        this.color == Color.WHITE && diff < 0
                 ) {
                     return true;
                 }
@@ -57,14 +58,14 @@ public class Pawn extends AbstractChessPiece {
 
         int diff = this.row - piece.getRow();
         int absDiffRow = Math.abs(diff);
-        int absDiffCol = Math.abs(this.column - piece.getColumn());
+        int absDiffCol = Math.abs(this.getColumn() - piece.getColumn());
 
         //To kill it needs to move exactly 1 row and 1 column
         if ((absDiffRow == 1 && absDiffCol == 1 )) {
-            //If whites, the direction must be positive (x1 - x2) > 0
-            //If whites, the direction must be negative (x1 - x2) < 0
-            if(this.color == Color.WHITE && diff > 0 ||
-                    this.color == Color.BLACK && diff < 0
+            //If Blacks, the direction must be positive (x1 - x2) > 0
+            //If Whites, the direction must be negative (x1 - x2) < 0
+            if(this.color == Color.BLACK && diff > 0 ||
+                    this.color == Color.WHITE && diff < 0
             ) {
                 return true;
             }
@@ -81,8 +82,8 @@ public class Pawn extends AbstractChessPiece {
     private boolean firstMovement(){
 
         //Check if this is the first movement
-        if (this.color == Color.WHITE && this.row == 6 ||
-                this.color == Color.BLACK && this.row == 1) {
+        if (this.color == Color.BLACK && this.row == 6 ||
+                this.color == Color.WHITE && this.row == 1) {
             return true;
         }
 
