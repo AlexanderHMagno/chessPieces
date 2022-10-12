@@ -33,32 +33,32 @@ public class ChessPieceTest {
     public void setUp() throws Exception {
 
         //Pawns
-        this.pawnBlack1 = new Pawn(2,3, Color.BLACK);
-        this.pawnBlack2 = new Pawn(4,6, Color.BLACK);
-        this.pawnBlack3 = new Pawn(3,2, Color.BLACK);
-        this.pawnWhite1 = new Pawn(6,0, Color.WHITE);
-        this.pawnWhite2 = new Pawn(3,4, Color.WHITE);
-        this.pawnWhite3 = new Pawn(1,2, Color.WHITE);
+        this.pawnBlack1 = new Pawn(5,3, Color.BLACK);
+        this.pawnBlack2 = new Pawn(3,6, Color.BLACK);
+        this.pawnBlack3 = new Pawn(4,2, Color.BLACK);
+        this.pawnWhite1 = new Pawn(1,0, Color.WHITE);
+        this.pawnWhite2 = new Pawn(4,4, Color.WHITE);
+        this.pawnWhite3 = new Pawn(6,2, Color.WHITE);
 
         //Knights
-        this.knightBlack1 = new Knight(4,2, Color.BLACK);
-        this.knightWhite1 = new Knight(7,7, Color.WHITE);
+        this.knightBlack1 = new Knight(3,2, Color.BLACK);
+        this.knightWhite1 = new Knight(0,7, Color.WHITE);
 
         //Bishops
-        this.bishopBlack1 = new Bishop(0,0, Color.BLACK);
-        this.bishopWhite1 = new Bishop(3,5, Color.WHITE);
+        this.bishopBlack1 = new Bishop(7,0, Color.BLACK);
+        this.bishopWhite1 = new Bishop(4,5, Color.WHITE);
 
         //Rooks
-        this.rookBlack1 = new Rook(7,4, Color.BLACK);
-        this.rookWhite1 = new Rook(0,7, Color.WHITE);
+        this.rookBlack1 = new Rook(0,4, Color.BLACK);
+        this.rookWhite1 = new Rook(7,7, Color.WHITE);
 
         //Queens
-        this.queenBlack1 = new Queen(2,5, Color.BLACK);
-        this.queenWhite1 = new Queen(4,3, Color.WHITE);
+        this.queenBlack1 = new Queen(5,5, Color.BLACK);
+        this.queenWhite1 = new Queen(3,3, Color.WHITE);
 
         //Kings
-        this.kingBlack1 = new King(1,6, Color.BLACK);
-        this.kingWhite1 = new King(5,6, Color.WHITE);
+        this.kingBlack1 = new King(6,6, Color.BLACK);
+        this.kingWhite1 = new King(2,6, Color.WHITE);
     }
 
     /**
@@ -66,7 +66,7 @@ public class ChessPieceTest {
      */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testOutOfColumn() {
-        ChessPiece crazyPiece = new Pawn(0,8, Color.WHITE);
+        ChessPiece crazyPiece = new Pawn(4,8, Color.WHITE);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ChessPieceTest {
      */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testInitialBlackPawnPosition () {
-        ChessPiece crazyPiece = new Pawn(0,4, Color.BLACK);
+        ChessPiece crazyPiece = new Pawn(7,4, Color.BLACK);
     }
 
     /**
@@ -98,7 +98,7 @@ public class ChessPieceTest {
      */
     @org.junit.Test (expected = IllegalArgumentException.class)
     public void testInitialWhitePawnPosition () {
-        ChessPiece crazyPiece = new Pawn(7,4, Color.WHITE);
+        ChessPiece crazyPiece = new Pawn(0,4, Color.WHITE);
     }
 
     /**
@@ -107,21 +107,21 @@ public class ChessPieceTest {
     @org.junit.Test
     public void testGetRow() {
         //Blacks
-        assertEquals(2,pawnBlack1.getRow());
-        assertEquals(4,pawnBlack2.getRow());
-        assertEquals(4,knightBlack1.getRow());
-        assertEquals(0,bishopBlack1.getRow());
-        assertEquals(7,rookBlack1.getRow());
-        assertEquals(2,queenBlack1.getRow());
-        assertEquals(1,kingBlack1.getRow());
+        assertEquals(5,pawnBlack1.getRow());
+        assertEquals(3,pawnBlack2.getRow());
+        assertEquals(3,knightBlack1.getRow());
+        assertEquals(7,bishopBlack1.getRow());
+        assertEquals(0,rookBlack1.getRow());
+        assertEquals(5,queenBlack1.getRow());
+        assertEquals(6,kingBlack1.getRow());
         //Whites
-        assertEquals(6,pawnWhite1.getRow());
-        assertEquals(3,pawnWhite2.getRow());
-        assertEquals(7,knightWhite1.getRow());
-        assertEquals(3,bishopWhite1.getRow());
-        assertEquals(0,rookWhite1.getRow());
-        assertEquals(4,queenWhite1.getRow());
-        assertEquals(5,kingWhite1.getRow());
+        assertEquals(1,pawnWhite1.getRow());
+        assertEquals(4,pawnWhite2.getRow());
+        assertEquals(0,knightWhite1.getRow());
+        assertEquals(4,bishopWhite1.getRow());
+        assertEquals(7,rookWhite1.getRow());
+        assertEquals(3,queenWhite1.getRow());
+        assertEquals(2,kingWhite1.getRow());
     }
 
     /**
@@ -178,54 +178,54 @@ public class ChessPieceTest {
     public void testCanMoveTrue() {
 
         //Black Pawns
-        assertTrue(pawnBlack1.canMove(3,3));
-        assertTrue(pawnBlack2.canMove(5,6));
+        assertTrue(pawnBlack1.canMove(4,3));
+        assertTrue(pawnBlack2.canMove(2,6));
         //Black Knight
-        assertTrue(knightBlack1.canMove(3,4));
-        assertTrue(knightBlack1.canMove(5,0));
+        assertTrue(knightBlack1.canMove(4,4));
+        assertTrue(knightBlack1.canMove(2,0));
         // bishop
-        assertTrue(bishopBlack1.canMove(4,4));
-        assertTrue(bishopBlack1.canMove(7,7));
+        assertTrue(bishopBlack1.canMove(3,4));
+        assertTrue(bishopBlack1.canMove(0,7));
         //Black Rook
-        assertTrue(rookBlack1.canMove(0,4));
-        assertTrue(rookBlack1.canMove(7,0));
+        assertTrue(rookBlack1.canMove(7,4));
+        assertTrue(rookBlack1.canMove(0,0));
         //Black Queen
-        assertTrue(queenBlack1.canMove(0,5));
-        assertTrue(queenBlack1.canMove(2,1));
-        assertTrue(queenBlack1.canMove(7,0));
-        assertTrue(queenBlack1.canMove(3,6));
+        assertTrue(queenBlack1.canMove(7,5));
+        assertTrue(queenBlack1.canMove(5,1));
+        assertTrue(queenBlack1.canMove(0,0));
+        assertTrue(queenBlack1.canMove(4,6));
         //Black King
-        assertTrue(kingBlack1.canMove(0,6));
-        assertTrue(kingBlack1.canMove(1,5));
-        assertTrue(kingBlack1.canMove(2,7));
+        assertTrue(kingBlack1.canMove(7,6));
+        assertTrue(kingBlack1.canMove(6,5));
+        assertTrue(kingBlack1.canMove(5,7));
 
         //Whites
         //Pawns
-        assertTrue(pawnWhite1.canMove(4,0));
-        assertTrue(pawnWhite1.canMove(5,0));
-        assertTrue(pawnWhite2.canMove(2,3));
+        assertTrue(pawnWhite1.canMove(3,0));
+        assertTrue(pawnWhite1.canMove(2,0));
+        assertTrue(pawnWhite2.canMove(5,4));
         //Knights
-        assertTrue(knightWhite1.canMove(6,5));
-        assertTrue(knightWhite1.canMove(5,6));
+        assertTrue(knightWhite1.canMove(1,5));
+        assertTrue(knightWhite1.canMove(2,6));
         //Bishops
-        assertTrue(bishopWhite1.canMove(1,3));
-        assertTrue(bishopWhite1.canMove(2,6));
-        assertTrue(bishopWhite1.canMove(7,1));
-        assertTrue(bishopWhite1.canMove(4,6));
+        assertTrue(bishopWhite1.canMove(6,3));
+        assertTrue(bishopWhite1.canMove(5,6));
+        assertTrue(bishopWhite1.canMove(0,1));
+        assertTrue(bishopWhite1.canMove(3,6));
         //Rooks
-        assertTrue(rookWhite1.canMove(0,0));
-        assertTrue(rookWhite1.canMove(3,7));
+        assertTrue(rookWhite1.canMove(7,0));
+        assertTrue(rookWhite1.canMove(4,7));
         //Queen
-        assertTrue(queenWhite1.canMove(2,5));
-        assertTrue(queenWhite1.canMove(5,4));
-        assertTrue(queenWhite1.canMove(1,3));
-        assertTrue(queenWhite1.canMove(4,7));
+        assertTrue(queenWhite1.canMove(5,5));
+        assertTrue(queenWhite1.canMove(2,4));
+        assertTrue(queenWhite1.canMove(6,3));
+        assertTrue(queenWhite1.canMove(3,7));
         //King
-        assertTrue(kingWhite1.canMove(4,6));
-        assertTrue(kingWhite1.canMove(6,6));
-        assertTrue(kingWhite1.canMove(5,7));
-        assertTrue(kingWhite1.canMove(6,5));
-        assertTrue(kingWhite1.canMove(4,7));
+        assertTrue(kingWhite1.canMove(3,6));
+        assertTrue(kingWhite1.canMove(1,6));
+        assertTrue(kingWhite1.canMove(2,7));
+        assertTrue(kingWhite1.canMove(1,5));
+        assertTrue(kingWhite1.canMove(3,7));
     }
 
     /**
@@ -236,40 +236,41 @@ public class ChessPieceTest {
 
         //Blacks
         //Can not move backwards
-        assertFalse(pawnBlack1.canMove(1,3));
-        assertFalse(pawnBlack2.canMove(3,6));
+        assertFalse(pawnBlack1.canMove(6,3));
+        assertFalse(pawnBlack2.canMove(4,6));
         //Can not jump if its not first movement
-        assertFalse(pawnBlack1.canMove(4,3));
-        assertFalse(pawnBlack2.canMove(6,6));
+        assertFalse(pawnBlack1.canMove(3,3));
+        assertFalse(pawnBlack2.canMove(1,6));
 
         //Can not move to the right
-        assertFalse(knightBlack1.canMove(4,3));
+        assertFalse(knightBlack1.canMove(3,3));
         //Can not get out of the chess board
-        assertFalse(bishopBlack1.canMove(8,8));
-        assertFalse(bishopBlack1.canMove(0,2));
+        assertFalse(bishopBlack1.canMove(8,1));
+        assertFalse(bishopBlack1.canMove(6,-1));
         //Can not move diagonal
-        assertFalse(rookBlack1.canMove(5,6));
+        assertFalse(rookBlack1.canMove(2,6));
         //Can not move in L
-        assertFalse(queenBlack1.canMove(4,4));
+        assertFalse(queenBlack1.canMove(3,4));
         //Can not move more than 2
-        assertFalse(kingBlack1.canMove(1,4));
+        assertFalse(kingBlack1.canMove(6,4));
 
         //Whites
-        assertFalse(pawnWhite1.canMove(3,6));
+        assertFalse(pawnWhite1.canMove(1,1));
         //can not move horizontally
-        assertFalse(pawnWhite1.canMove(6,1));
+        assertFalse(pawnWhite1.canMove(2,1));
+        assertFalse(pawnWhite2.canMove(5,3));
         //Can not move backwards
-        assertFalse(pawnWhite2.canMove(4,4));
+        assertFalse(pawnWhite2.canMove(5,5));
         //Can not move out of the chessboard
-        assertFalse(knightWhite1.canMove(5,8));
+        assertFalse(knightWhite1.canMove(2,8));
         //Can not move vertically
-        assertFalse(bishopWhite1.canMove(2,5));
+        assertFalse(bishopWhite1.canMove(5,5));
         //Can not move diagonally
-        assertFalse(rookWhite1.canMove(7,0));
+        assertFalse(rookWhite1.canMove(0,0));
         //Can not move out of boundary
-        assertFalse(queenWhite1.canMove(4,8));
+        assertFalse(queenWhite1.canMove(3,8));
         //Can not move more than 2 diagonally
-        assertFalse(kingWhite1.canMove(3,4));
+        assertFalse(kingWhite1.canMove(4,4));
     }
 
     /**
@@ -376,22 +377,22 @@ public class ChessPieceTest {
      */
     @org.junit.Test
     public void testToString() {
-        assertEquals("{row=2, column=3, color=BLACK, type=Pawn}", pawnBlack1.toString());
-        assertEquals("{row=4, column=6, color=BLACK, type=Pawn}", pawnBlack2.toString());
-        assertEquals("{row=3, column=2, color=BLACK, type=Pawn}", pawnBlack3.toString());
-        assertEquals("{row=4, column=2, color=BLACK, type=Knight}", knightBlack1.toString());
-        assertEquals("{row=0, column=0, color=BLACK, type=Bishop}", bishopBlack1.toString());
-        assertEquals("{row=7, column=4, color=BLACK, type=Rook}", rookBlack1.toString());
-        assertEquals("{row=2, column=5, color=BLACK, type=Queen}", queenBlack1.toString());
-        assertEquals("{row=1, column=6, color=BLACK, type=King}", kingBlack1.toString());
+        assertEquals("{row=5, column=3, color=BLACK, type=Pawn}", pawnBlack1.toString());
+        assertEquals("{row=3, column=6, color=BLACK, type=Pawn}", pawnBlack2.toString());
+        assertEquals("{row=4, column=2, color=BLACK, type=Pawn}", pawnBlack3.toString());
+        assertEquals("{row=3, column=2, color=BLACK, type=Knight}", knightBlack1.toString());
+        assertEquals("{row=7, column=0, color=BLACK, type=Bishop}", bishopBlack1.toString());
+        assertEquals("{row=0, column=4, color=BLACK, type=Rook}", rookBlack1.toString());
+        assertEquals("{row=5, column=5, color=BLACK, type=Queen}", queenBlack1.toString());
+        assertEquals("{row=6, column=6, color=BLACK, type=King}", kingBlack1.toString());
 
-        assertEquals("{row=6, column=0, color=WHITE, type=Pawn}", pawnWhite1.toString());
-        assertEquals("{row=3, column=4, color=WHITE, type=Pawn}", pawnWhite2.toString());
-        assertEquals("{row=1, column=2, color=WHITE, type=Pawn}", pawnWhite3.toString());
-        assertEquals("{row=7, column=7, color=WHITE, type=Knight}", knightWhite1.toString());
-        assertEquals("{row=3, column=5, color=WHITE, type=Bishop}", bishopWhite1.toString());
-        assertEquals("{row=0, column=7, color=WHITE, type=Rook}", rookWhite1.toString());
-        assertEquals("{row=4, column=3, color=WHITE, type=Queen}", queenWhite1.toString());
-        assertEquals("{row=5, column=6, color=WHITE, type=King}", kingWhite1.toString());
+        assertEquals("{row=1, column=0, color=WHITE, type=Pawn}", pawnWhite1.toString());
+        assertEquals("{row=4, column=4, color=WHITE, type=Pawn}", pawnWhite2.toString());
+        assertEquals("{row=6, column=2, color=WHITE, type=Pawn}", pawnWhite3.toString());
+        assertEquals("{row=0, column=7, color=WHITE, type=Knight}", knightWhite1.toString());
+        assertEquals("{row=4, column=5, color=WHITE, type=Bishop}", bishopWhite1.toString());
+        assertEquals("{row=7, column=7, color=WHITE, type=Rook}", rookWhite1.toString());
+        assertEquals("{row=3, column=3, color=WHITE, type=Queen}", queenWhite1.toString());
+        assertEquals("{row=2, column=6, color=WHITE, type=King}", kingWhite1.toString());
     }
 }
