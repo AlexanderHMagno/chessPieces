@@ -8,7 +8,6 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
 
     protected final Position position;
-
     protected final Color color;
 
     /**
