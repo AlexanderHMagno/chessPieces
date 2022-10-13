@@ -97,10 +97,11 @@ public class Position {
      * @param row row to compare the direction of the movement
      *            if its positive the element is moving from top to bottom
      *            if its negative the element is moving from bottom to top
-     * @return
+     * @return The number indicate if it's moving up (-1) or down (1), not movement (0)
      */
     public int getDirection(int row) {
-        return this.getRow() - row;
+        int diff = this.getRow() - row;
+        return diff == 0 ? 0 : (diff) / Math.abs(diff);
     }
 
     /**
